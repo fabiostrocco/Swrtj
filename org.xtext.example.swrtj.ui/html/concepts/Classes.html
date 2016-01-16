@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Classes</title>
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Classes</h1>
+	<p>
+		Classes contain only <strong>constructors</strong> and they must to implements <a href="Interfaces.html">interfaces</a> using
+		<a href="Traits.html">traits</a> and fields given by <a href="Records.html">records</a>.<br/>
+		Here the inheritance is not applicable and <strong>classes are not types</strong>.<br/>
+		Follows a class definition example.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">class</span> CAccount <span class="key">implements</span> IAccount <span class="key">by</span> RAccount <span class="key">and</span> 
+			TAccount { <br/>
+				&emsp;&emsp;CAccount() { <br/>
+					&emsp;&emsp;&emsp;&emsp;<span class="key">this</span>.init(); <br/>
+				&emsp;&emsp;} <br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+	<p>
+		You can also use record and trait expressions.<br/>
+		Follows an example.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">class</span> CSyncAccount <span class="key">implements</span> IAccount, ISyncAccount <span class="key">by</span> RSyncAccount <span 
+			class="key">and</span> <br/>
+			    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;TAccount + {...} + TSynchronized { <br/>
+				&emsp;&emsp;CSyncAccount() { <br/>
+					&emsp;&emsp;&emsp;&emsp;<span class="key">this</span>.init(); <br/>
+				&emsp;&emsp;} <br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+</body>
+</html>

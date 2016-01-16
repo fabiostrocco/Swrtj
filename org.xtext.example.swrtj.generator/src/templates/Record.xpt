@@ -1,0 +1,10 @@
+«IMPORT swrtj»
+
+«EXTENSION templates::External»
+
+«DEFINE recordExpression FOR RecordExpression-»
+«LET this.getAllProvidedFields() AS fieldList-»
+«EXPAND Commons::fieldDeclaration FOREACH fieldList-»
+«IF !fieldList.isEmpty-»«"\n"»«ENDIF-»
+«ENDLET-»
+«ENDDEFINE»

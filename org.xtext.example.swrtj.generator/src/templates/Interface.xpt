@@ -1,0 +1,18 @@
+«IMPORT swrtj»
+
+«EXTENSION templates::External»
+
+«DEFINE interface FOR Interface-»
+«FILE this.uriToPackage() + "/" + this.name + ".java"-»
+package «this.uriToName()»;
+
+«EXPAND Commons::import FOREACH this.urisToNames()»
+public interface «this.name»«IF !this.extendsList.isEmpty» extends «EXPAND extends FOREACH this.extendsList SEPARATOR ", "»«ENDIF» {
+	«EXPAND Commons::requiredMethod FOREACH this.requiredMethodList.typeSelect(RequiredMethod)-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE extends FOR Interface-»
+«this.toJavaName()-»
+«ENDDEFINE»

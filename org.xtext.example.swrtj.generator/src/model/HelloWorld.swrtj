@@ -1,0 +1,3 @@
+program HelloWorld {
+	out.println("Hello world");
+}

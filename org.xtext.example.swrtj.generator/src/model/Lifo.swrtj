@@ -1,0 +1,103 @@
+/*
+This example shows how traits and records prevent unanticipated
+code reuse
+*/
+
+interface IQueue {
+	boolean isEmpty();
+	void enqueue(IObject element);
+	IObject dequeue();
+}
+
+trait TQueue is {
+	IList l;
+	
+	boolean isEmpty() {
+		return this.l.isEmpty();
+	}
+	
+	void enqueue(IObject element) {
+		this.l.add(this.l.size(), element);
+	}
+	
+	IObject dequeue() {
+		IObject element = this.l.get(0);
+		this.l.remove(element);
+		
+		return element;
+	}
+}
+
+record RFifo is {IList l;}
+
+class Queue implements IQueue by RFifo and TQueue {
+	Queue() {
+		this.l = new CLinkedList();
+	}
+}
+
+/*
+Subsequentialy, an IFifo interface is needed
+and we should to reuse some methods of the IQueue implementation
+*/
+
+interface IFifo {
+	boolean isEmpty();
+	void enqueue(IObject element);
+	void dequeue();
+	IObject peek();
+}
+
+trait TFifo is TQueue[exclude dequeue] + 
+	{
+		IList l;
+		
+		void dequeue() {
+			this.l.remove(this.l.get(0));
+		}
+		
+		IObject peek() {
+			return this.l.get(0);
+		}
+	}
+
+class Fifo implements IFifo by RFifo and TFifo {
+	Fifo() {
+			this.l = new CLinkedList();
+	}
+}
+
+program Main {
+	IQueue queue = new Queue();
+	IFifo fifo = new Fifo();
+	
+	out.println("Insert a string");
+	fifo.enqueue(in.nextLine());
+	queue.enqueue(fifo.peek());
+	
+	out.println("Insert another string");
+	fifo.enqueue(in.nextLine());
+	queue.enqueue(fifo.peek());
+	
+	out.println("Queue dequeue = ".concat((IString)(queue.dequeue())));
+	out.println("Fifo peek = ".concat((IString)(fifo.peek())));
+	out.println("Fifo dequeue");
+	fifo.dequeue();
+	
+	out.println("Queue dequeue = ".concat((IString)(queue.dequeue())));
+	out.println("Fifo peek = ".concat((IString)(fifo.peek())));
+	out.println("Fifo dequeue");
+	fifo.dequeue();
+	
+	if(fifo.isEmpty() == true) {
+		out.println("Fifo is emty");
+	} else {
+		out.println("Fifo is not empty");
+	}
+	
+	if(queue.isEmpty() == true) {
+		out.println("Queue is emty");
+	} else {
+		out.println("Queue is not empty");
+	}
+}

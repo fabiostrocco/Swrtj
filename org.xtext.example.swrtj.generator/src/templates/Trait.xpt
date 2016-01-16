@@ -1,0 +1,13 @@
+«IMPORT swrtj»
+
+«EXTENSION templates::External»
+
+«DEFINE traitExpression FOR TraitExpression-»
+«LET this.getTraitMappings() AS mappings-»
+«FOREACH mappings AS mapping SEPARATOR "\n"-»
+«LET (List)mapping AS methodMappings-»
+«EXPAND Commons::providedMethod FOR methodMappings-»
+«ENDLET-»
+«ENDFOREACH-»
+«ENDLET-»
+«ENDDEFINE»

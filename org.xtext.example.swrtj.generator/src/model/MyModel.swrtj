@@ -1,0 +1,166 @@
+import "Referenced.swrtj"
+
+interface I1 extends I2, I3, I4 {I1 m1();}
+interface I2 extends I3 {I2 m2(I8 a, I2 b, I3 c);}
+interface I3 {I3 m3();}
+interface I4 extends I2 {I4 m4();}
+interface I5 extends I1, I4 {}
+interface I6 {}
+interface I7 extends I4, I5, I6 {}
+interface I8 extends I6, I7 {}
+interface I9 extends I6 {}
+interface I10 extends I1, I9 {}
+interface XObject {}
+
+trait T1 is {
+	I1 f1;
+	
+	void m1(){this.f1.m1();}
+}
+
+trait T2 is {
+	I1 f1;
+	I8 f2;
+	
+	
+	I1 m1(){return (I1)this.f1.m2((I8)((this.f2.m3()).m3().m3()).m3(), ((((this)))), this.f1.m2((I8)(this.f1), (I8)(new C()).m1(), this.f1));}
+	I2 m2(I8 a, I2 b, I3 c){return this.f2.m2(this, (I2)b.m3(), this);}
+	I3 m3(){if(this == null) {} return ((I2)this.m4());}
+	I4 m4(){return this;}
+	I5 mm(int z) {
+		I1 x = null;
+		I2 y = x.m1();
+		I5 r = (I5)null;
+		I5 rr = (I5)r;
+		IObject o = new CArrayList(10);
+		IString str = "Test";
+		IList l = new CArrayList();
+		int a = 10;
+		int code = "Test".hashCode();
+		boolean v = true;
+		boolean k = "Test".equals("Test");
+		long ll = 10;
+		int kk = a;
+		short sh = (short)10;
+		float f = new CBigInteger("10").floatValue();
+		
+		this.f1 = this.f1 = this.f2.m1();
+		this.m1();
+		this.mm(1);
+		
+		if(! this == null && this != null | 10 < 10 ^ true && !(this == this) &&
+		   ((!(((10 > 30)))) || true) || (true && false)) {
+		   	while(true | !false && (new CLinkedList().equals(null))) {
+		   		if(this == null) {} else {}
+		   	}
+			if(this == new CObject()) {
+				if(null == null) {
+					if(l == new CArrayList()) {
+						IBigInteger bigInteger = null;
+						out.println(l);
+						while(false != true) {}
+					}
+				} else {
+					out.println("else");
+				}
+			} else {
+				if("".equals("") == true) {}
+			}
+		}
+	
+		return null;
+	}
+}
+
+trait T3 is (T1 + T2[m1 renameTo m1Renamed, exclude mm]) + {
+	int f3;
+	
+	I4 m4();
+	void m6();
+	
+	void m5() {
+		this.m4();
+		this.m5();
+		this.m6();
+		this.f3 = 0;
+	}
+}
+
+trait T4 is T3[m4 renameTo m4Renamed, m6 renameTo m6Renamed, f3 renameFieldTo f3Renamed] + {
+	void m6Renamed() {
+		this.m6Renamed();
+	}
+}
+
+class C1 implements I8 by R2[exclude f1] + {I1 f1; int f3Renamed;} and T4[exclude m1] + {I4 m4(){return null;} I1 m1() {return null;}} {
+	C1() {
+		this.m1Renamed();
+	}
+}
+
+trait T5 is T1[exclude m1] + ((T2[mm renameTo mmRenamed])[mmRenamed aliasAs mmRenamedAliased] + ({} +
+            T4[m1 renameTo m1Renamed2, exclude m2, exclude m3] + {I5 mmRenamed(int x); void mr(){this.mmRenamed(10);}}))
+
+trait T6 is T1 + (T5[m1 renameTo m1Renamed3] + {void m1(){}} + (T1[exclude m1] +
+                 T1[exclude m1] + {} + ({int x; void xr(int i); void xp(){this.xr(this.x);}})))[m1 renameTo m1Renamed4] +
+                 {}
+
+record R1 is {I1 f1;}
+record R2 is {I2 f1; I8 f2; int k;}
+record R3 is R1 + R2[f1 renameTo f11]
+record R4 is ((((R1))) + (R2[exclude f1] + R1[f1 renameTo f11]) + (R2[exclude f1, f2 renameTo f22, exclude k] + 
+              R1[f1 renameTo f111]))[exclude f22]
+record R5 is ({int a;} + {int b;} + ({int c;} + ({boolean d;})))
+
+class C implements I8 by R4 and T2 {C(){
+	IObject o = new CObject();
+	boolean x = true;
+	int y = 135;
+	
+	out.println(o); 
+	this.f2.m2((I8)this.f1, this.f2, this.f2);
+	if(o == null) {
+		if(o == null) {
+			if(o == null) {
+				IList l = new CArrayList(this.k);
+				IObject oo = null;
+				
+				if(o == oo) {} else {}
+			} else {
+			}
+		}
+	}
+}
+	C(I8 f1, I8 f2) {
+		this.f1 = f1;
+		this.f11 = f1;
+		this.f2 = f2;	
+	}
+}
+
+class C2 implements I8 by R2[exclude f1] + {I1 f1; int f3Renamed;}  and T5 {}
+
+class C3 implements I8 by R2[exclude f1] + {I1 f1; int f3Renamed;}  and T6[exclude xp, exclude m1] + {I1 m1(){return null;}} 
+{
+	C3() {
+		this.f1 = new C1();
+		this.m1Renamed4();
+		if(this.m1Renamed3() == this.m3()) {}
+	}
+}
+
+class Object implements XObject by {} and {} {Object(int k){int a = 0;}}
+
+program Main {
+	if(args.size() == 0) {
+		out.println("No input");
+	} else {
+		out.println(args.get(0));
+	}
+}
+
+program Main2 {
+	out.println("Test");
+}
+
+program Main3 {}

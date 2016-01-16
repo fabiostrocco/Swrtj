@@ -1,0 +1,43 @@
+import swrtj;
+
+List[File] getAllReferencedFiles(File this) : 
+	JAVA org.xtext.example.utils.JavaExtensions.getAllFiles(org.xtext.example.swrtj.File);
+
+Collection[FieldName] getAllProvidedFields(RecordExpression this) :
+	JAVA org.xtext.example.utils.JavaExtensions.getRecordFields(org.xtext.example.swrtj.RecordExpression);
+	
+Type getType(FieldName this) :
+	JAVA org.xtext.example.utils.JavaExtensions.getType(org.xtext.example.swrtj.FieldName);
+	
+Field getField(FieldName this) :
+	JAVA org.xtext.example.utils.JavaExtensions.getField(org.xtext.example.swrtj.FieldName);
+	
+Type getReturnType(MethodName this) :
+	JAVA org.xtext.example.utils.JavaExtensions.getReturnType(org.xtext.example.swrtj.MethodName);
+	
+Collection[Parameter] getParameterList(MethodName this) :
+	JAVA org.xtext.example.utils.JavaExtensions.getParameterList(org.xtext.example.swrtj.MethodName);
+	
+Method getMethod(MethodName this) :
+	JAVA org.xtext.example.utils.JavaExtensions.getMethod(org.xtext.example.swrtj.MethodName);
+	
+String toJavaName(Element this) :
+	JAVA org.xtext.example.utils.JavaExtensions.toJavaName(org.xtext.example.swrtj.Element);
+
+List[Object] getTraitMappings(TraitExpression this) :
+	JAVA org.xtext.example.utils.JavaExtensions.getTraitMappings(org.xtext.example.swrtj.TraitExpression);
+
+String getElementName(Message message, List originalNames, List realNames) :
+	JAVA org.xtext.example.utils.JavaExtensions.getElementName(org.xtext.example.swrtj.Message, java.util.List, java.util.List);
+	
+String uriToPackage(Element this) :
+	JAVA org.xtext.example.utils.JavaExtensions.uriToPackage(org.xtext.example.swrtj.Element);
+	
+List[String] urisToPackages(Element this) :
+	JAVA org.xtext.example.utils.JavaExtensions.urisToPackages(org.xtext.example.swrtj.Element);
+	
+String uriToName(Element this) :
+	JAVA org.xtext.example.utils.JavaExtensions.uriToName(org.xtext.example.swrtj.Element);
+
+List[String] urisToNames(Element this) :
+	JAVA org.xtext.example.utils.JavaExtensions.urisToNames(org.xtext.example.swrtj.Element);

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="SWRTJ IDE">
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+         <property
+               name="aboutText"
+               value="SWRTJ - Sugared Welterweight Record-Trait Java&#x0A;by Fabio Strocco, Lorenzo Bettini&#x0A;and Ferruccio Damiani, Ina Schaefer&#x0A;&#x0A;SWRTJ is a Java-like language where units of objects&apos; functionality are modeled by traits and by records.&#x0A;&#x0A;http://swrtj.sourceforge.net&#x0A;GPL Licence">
+         </property>
+         <property
+               name="aboutImage"
+               value="icons/alt_about.gif">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="000000">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="7,252,445,20">
+         </property>
+         <property
+               name="appName"
+               value="SWRTJ IDE">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+      </product>
+   </extension>
+</plugin>

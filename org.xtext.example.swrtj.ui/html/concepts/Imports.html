@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Imports</title>
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Imports</h1>
+	<p>
+		The <em>import</em> instruction in a file, imports an swrtj file (that can contain one more elements like classes, interfaces, etc.) into the file
+		so that every element of the imported file can be used within the importing file.<br/>
+		For instance, suppose to have a file 'Account.swrtj' that provides the interface <em>IAccount</em> and the class <em>CAccount</em>, you can use it within
+		a file 'Main.swrtj'.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">import</span> "Account.swrtj" <br/>
+			<br/>
+			<span class="key">program</span> Main { <br/>
+				&emsp;&emsp;IAccount myAccount = new CAccount();<br/>
+				&emsp;&emsp;... <br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+	
+	<p>
+		When you import a file it will be added to files to generate. In the example above if you generate 'Main.swrtj' even 'Account.swrtj' will be generated
+		into a different java package.
+	</p>
+</body>
+</html>

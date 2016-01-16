@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.xtext.example.swrtj/src-gen"
+    editDirectory="/org.xtext.example.swrtj.edit/src" editorDirectory="/org.xtext.example.swrtj.editor/src"
+    modelPluginID="org.xtext.example.swrtj" forceOverwrite="true" modelName="Swrtj"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.xtext.example.swrtj.edit"
+    editorPluginID="org.xtext.example.swrtj.editor" usedGenPackages="classpath:/model/JavaVMTypes.genmodel#//types">
+  <genPackages prefix="Swrtj" basePackage="org.xtext.example" disposableProviderFactory="true"
+      ecorePackage="Swrtj.ecore#/">
+    <genClasses ecoreClass="Swrtj.ecore#//File">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//File/importList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//File/elementList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Import/importURI"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Element/construct"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Element/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Interface">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Interface/extendsList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Interface/requiredMethodList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Record">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Record/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Trait">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Trait/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Class">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Class/implementsList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Class/recordExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Class/traitExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Class/constructorList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Program/block"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//RecordExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//RecordExpression/recordList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//BaseRecord">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//BaseRecord/operationList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//AnonimousRecord">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//AnonimousRecord/declarationList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//RecordName">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//RecordName/record"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//NestedRecordExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//NestedRecordExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//RecordOperation"/>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitExpression/traitList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//BaseTrait">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//BaseTrait/operationList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//AnonimousTrait">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//AnonimousTrait/definitionList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitName">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitName/trait"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//NestedTraitExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//NestedTraitExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitOperation"/>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitElement"/>
+    <genClasses ecoreClass="Swrtj.ecore#//Field">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Field/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Field/fieldRef"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Method">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Method/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Method/methodRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Method/parameterList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Constructor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Constructor/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Constructor/parameterList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Constructor/block"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//ReturnStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ReturnStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Parameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Parameter/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Parameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//FieldName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//FieldName/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//MethodName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//MethodName/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Type">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Type/interfaceType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Type/primitiveType"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Block/parameterList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Block/statementList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Statement"/>
+    <genClasses ecoreClass="Swrtj.ecore#//ExpressionStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ExpressionStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//IfThenElseStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//IfThenElseStatement/condiction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//IfThenElseStatement/trueBranch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//IfThenElseStatement/falseBranch"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//WhileStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//WhileStatement/condiction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//WhileStatement/whileBlock"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//GenericExpression"/>
+    <genClasses ecoreClass="Swrtj.ecore#//BooleanOperator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//BooleanOperator/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//AtomicBooleanExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//AtomicBooleanExpression/negated"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//SimpleComparation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//SimpleComparation/leftExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//SimpleComparation/compare"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//SimpleComparation/rightExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//NestedBooleanExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//NestedBooleanExpression/nestedExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//CompareOperator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//CompareOperator/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//DottedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//DottedExpression/start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//DottedExpression/receiver"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//DottedExpression/message"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//DottedExpression/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Start"/>
+    <genClasses ecoreClass="Swrtj.ecore#//Null">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Null/null"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Input">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Input/input"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Args">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Args/args"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Output">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Output/output"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//BooleanConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//BooleanConstant/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Number">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Number/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//StringConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//StringConstant/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//This">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//This/this"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//ParameterReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ParameterReference/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//ConstructorInvocation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ConstructorInvocation/classRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ConstructorInvocation/argumentList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Cast">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Cast/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Cast/start"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//NestedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//NestedExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Message"/>
+    <genClasses ecoreClass="Swrtj.ecore#//MethodInvocation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//MethodInvocation/method"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//MethodInvocation/argumentList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//FieldAccess">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//FieldAccess/field"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//ParameterAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ParameterAssignment/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ParameterAssignment/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//RecordExclude">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//RecordExclude/field"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//RecordRename">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//RecordRename/originalField"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//RecordRename/newField"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitExclude">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitExclude/method"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitAlias">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitAlias/originalMethod"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitAlias/newMethod"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitMethodRename">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitMethodRename/originalMethod"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitMethodRename/newMethod"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//TraitFieldRename">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitFieldRename/originalField"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//TraitFieldRename/newField"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//FieldDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//FieldDeclaration/modifier"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//RequiredField"/>
+    <genClasses ecoreClass="Swrtj.ecore#//RequiredMethod"/>
+    <genClasses ecoreClass="Swrtj.ecore#//ProvidedMethod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//ProvidedMethod/isSynchronized"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ProvidedMethod/block"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//ProvidedMethod/returnStatement"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//FormalParameter"/>
+    <genClasses ecoreClass="Swrtj.ecore#//BooleanExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//BooleanExpression/atomicList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//BooleanExpression/booleanOperatorList"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//LocalParameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//LocalParameter/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Swrtj.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Expression/sign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Swrtj.ecore#//Expression/termList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Swrtj.ecore#//Expression/operatorList"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

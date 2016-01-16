@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Getting Started" link_to="toc.xml#gettingstarted"> 
+	<topic href="html/gettingstarted/firstJavaProject.html" label="How to create your first Swrtj project">
+	</topic>
+ <topic href="html/gettingstarted/firstJavaFile.html" label="How to create your first Swrtj file">
+ </topic>
+ <topic href="html/gettingstarted/generateJavaFiles.html" label="How to generate java files">
+ </topic> 
+</toc>

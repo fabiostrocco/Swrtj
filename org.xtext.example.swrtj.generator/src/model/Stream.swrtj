@@ -1,0 +1,104 @@
+/*
+This example shows how is possible to create a stream hierarchy
+with a read/write stream class using only traits and records
+as reuse unit.
+*/
+
+interface IStream {
+	void close();
+}
+
+interface IWriteStream extends IStream {
+	void write(IString data);
+}
+
+interface IReadStream extends IStream {
+	IString read();
+}
+
+interface IReadWriteStream extends IWriteStream, IReadStream {}
+
+record ReadResource is {IScanner resource;}
+
+record WriteResource is {IPrintStream resource;}
+
+record ReadWriteResource is 
+	ReadResource[resource renameTo readResource] + WriteResource[resource renameTo writeResource]	
+
+trait TReadStream is {
+	IScanner resource;
+	
+	void init() {
+		this.resource = in;
+	}
+	
+	IString read() {
+		return this.resource.nextLine();
+	}
+	
+	void close() {
+		out.println("Read stream closed");
+	}
+}
+
+trait TWriteStream is {
+	IPrintStream resource;
+	
+	void init() {
+		this.resource = out;
+	}
+	
+	void write(IString data) {
+		this.resource.println(data);
+	}
+	
+	void close() {
+		out.println("Write stream closed");
+	}
+}
+
+trait TReadWriteStream is 
+	TReadStream[init renameTo readInit, resource renameFieldTo readResource, close renameTo readClose] + 
+	TWriteStream[init renameTo writeInit, resource renameFieldTo writeResource, close renameTo writeClose] +
+	{
+		void readInit();
+		void writeInit();
+		void readClose();
+		void writeClose();
+		
+		void init() {
+			this.readInit();
+			this.writeInit();
+		}
+		
+		void close() {
+			this.readClose();
+			this.writeClose();
+		}
+	}
+	
+class CReadStream implements IReadStream by ReadResource and TReadStream {
+	CReadStream() {
+		this.init();
+	}
+}
+
+class CWriteStream implements IWriteStream by WriteResource and TWriteStream {
+	CWriteStream() {
+		this.init();
+	}
+}
+
+class CReadWriteStream implements IReadWriteStream by ReadWriteResource and TReadWriteStream {
+	CReadWriteStream() {
+		this.init();
+	}
+}
+
+program Main {
+	IReadWriteStream stream = new CReadWriteStream();
+	
+	stream.write("Please insert a string");
+	stream.write("You wrote: ".concat(stream.read()));
+	stream.close();
+}

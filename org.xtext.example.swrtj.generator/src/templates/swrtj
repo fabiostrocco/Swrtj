@@ -1,0 +1,2 @@
+#This is the shell script that calls the compiler
+java -jar swrtj.jar $*

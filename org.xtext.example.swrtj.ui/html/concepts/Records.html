@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Records</title>
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Records</h1>
+	<p>
+		A record is a set of fields. Here's an example of basic record declaration.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">record</span> RAccount <span class="key">is</span> { <br/>
+				&emsp;&emsp;<span class="key">int</span> money;<br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+	<p>
+		Records can be composed by other records by using one or more of the following record operations.
+	</p>
+	
+	<strong>Record sum (commutative and associative)</strong>
+	<p>
+		Creates a record that contains all the fields of the sum record elements(two or more).</br>
+		If there is a field conflict(fields with the same name in different records) please use the exclude or rename operation.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">record</span> RSyncAccount <span class="key">is</span> RAccount + RSynchronizer </br>
+			<br/>
+		</code>
+	</div>
+	
+	<p/>
+	
+	<strong>Record exclusion</strong>
+	<p>
+		Excludes a field from a record.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">record</span> RWindow <span class="key">is</span> RDecoredWindow[<span class="key">exclude</span> windowDecoration] </br>
+			<br/>
+		</code>
+	</div>
+	
+	<p/>
+	
+	<strong>Record renaming</strong>
+	<p>
+		Renames a field of a record. The new name must not exist in the target record.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">record</span> RErrorMessage <span class="key">is</span> RMessage[description <span class="key">renameTo</span> errorDescription] </br>
+			<br/>
+		</code>
+	</div>
+</body>
+</html>

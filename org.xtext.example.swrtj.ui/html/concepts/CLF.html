@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Imports</title>
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Common language features</h1>
+	<p>
+		Like every programming language, SWRTJ implements some common features like the if-then-else statements, while statements etc. <br/>
+		Since SWRTJ is still a prototype, it doesn't implements all of them, for instance, arrays are no supported (but you can however use the CArrayList class). <br/>
+		The supported features are
+		<ul>
+			<li>
+				<strong>Method and field expression chain</strong>: let 'x' be a variable or the this implicit parameter, you can type expression in the form
+				<code>x.f.m1(...).m2(...)...</code> where 'f' is a field name (can be omitted) and 'm' a method name.
+			</li>
+			<li>
+				<strong>Default Types</strong>: SWRTJ includes a suite of java-like primitive types. Such types have the following subtyping relation<br/>
+				<code>byte</code> subtype of <code>short</code> subtype of <code>int</code> subtype of <code>long</code> subtype of <code>float</code> subtype of
+				<code>double</code>, <code>char</code> subtype of <code>short</code> and <code>short</code> subtype of <code>char</code>. The other primitive types are 	
+				<code>boolean</code> and <code>void</code>.</br>
+				Moreover there is a suite of java classes such as <code>String</code> that is mapped to the <code>IString</code> interface and the <code>CString</code> 	
+				class in SWRTJ.
+			</li>
+			<li>
+				<strong>Constants</strong>: the language supports <em>numeric constants</em> (0, 1, 2, ...) of type <code>int</code>, the <code>null</code> constant,
+				the boolean constants <code>true</code> and <code>false</code>, and the string constants, in the form <code>"t"</code> where 't'
+				is the text (a general character string).
+ 			</li>
+			<li>
+				<strong>Arithmetic expressions</strong>: where the operators <code>+, -, *, /, %</code> are supported with the same java semantics.
+			</li>
+			<li>
+				<strong>If-Else statement</strong>: the language supports this construct in the following form <br/>
+				<code>if(condition) {statement1} else {statement2}</code> where the <em>else</em> branch can be omitted.
+			</li>
+			<li>
+				<strong>While</strong>: the language supports this construct in the following form <br/>
+				<code>while(condition) {statement1}</code>
+			</li>
+			<li>
+				<strong>Conditions</strong>: conditions are boolean formulas allowed in <em>if</em> and <em>while</em> statements and in assignments.<br/>
+				A condition is a list of atomic boolean formulas connected by the <code>&, |, &&, ||, ^</code> operators (and, or, lazy and, lazy or, xor).<br/>
+				An atomic formula is a boolean constant, boolean method and field expression chin or a comparison using the <code>==, !=</code> and numeric order 		 
+				comparation operators. In every condition <code>C</code> you can negate by typing <code>!C</code>.
+			</li>
+		</ul>
+</body>
+</html>

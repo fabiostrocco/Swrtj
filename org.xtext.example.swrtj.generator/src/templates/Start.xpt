@@ -1,0 +1,21 @@
+«IMPORT swrtj»
+
+«EXTENSION templates::External»
+
+«DEFINE main FOR File-»
+«EXPAND file FOREACH this.getAllReferencedFiles()-»
+«ENDDEFINE»
+
+«DEFINE file FOR File-»
+«EXPAND element FOREACH this.elementList-»
+«ENDDEFINE»
+
+«DEFINE element FOR Element-»
+«IF this.construct == "interface"-»
+«EXPAND Interface::interface FOR (Interface)this-»
+«ELSEIF this.construct == "class"-»
+«EXPAND Class::class FOR (Class)this-»
+«ELSEIF this.construct == "program"-»
+«EXPAND Program::program FOR (Program)this-»
+«ENDIF-»
+«ENDDEFINE»

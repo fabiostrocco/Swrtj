@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Traits</title>
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Traits</h1>
+	<p>
+		A trait is a set of methods. Here's an example of basic trait declaration.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">trait</span> TAccount <span class="key">is</span> { <br/>
+				&emsp;&emsp;<span class="key">int</span> money;<br/>
+				<br/>
+				&emsp;&emsp;<span class="key">void</span> commit();<br/>
+				&emsp;&emsp;<span class="key">void</span> update(int money) {<br/>
+					&emsp;&emsp;&emsp;&emsp;...<br/>
+				&emsp;&emsp;}<br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+	<p>
+		The field <em>money</em> is just an indicator that the class that will use this trait has to provide this field. At the same way
+		the method declaration of <em>commit</em> just indicates that class has to provide such method.<br/>
+		The method <em>update</em> contains a method implementation that is provided to every class that use this trait.
+	<p/>
+	<p>
+		Traits can be composed by other traits by using one or more of the following trait operations.
+	</p>
+	
+	<strong>Trait sum (commutative and associative)</strong>
+	<p>
+		Creates a trait that contains all the methods of the sum trait elements(two or more).</br>
+		If there is a method conflict(method with the same name in different traits) please use the exclude or rename operation.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">trait</span> TSyncAccount <span class="key">is</span> TAccount + TSynchronizer </br>
+			<br/>
+		</code>
+	</div>
+	
+	<p/>
+	
+	<strong>Trait exclusion</strong>
+	<p>
+		Excludes a method (required or provided) from a trait.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">trait</span> TWindow <span class="key">is</span> TDecoredWindow[<span class="key">exclude</span> setDecoration] </br>
+			<br/>
+		</code>
+	</div>
+	
+	<p/>
+	
+	<strong>Trait aliasing</strong>
+	<p>
+		Makes the aliasing of a provided method (creating the method copy).<br/>
+		The original method is not cancelled.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">trait</span> TErrorMessage <span class="key">is</span> TMessage[getDescription <span class="key">aliasAs</span> getErrorDescription] </br>
+			<br/>
+		</code>
+	</div>
+	<p/>
+	
+	<strong>Trait method renaming</strong>
+	<p>
+		Renames a method of a trait. The new name must not exist in the target trait.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">trait</span> TErrorMessage <span class="key">is</span> TMessage[getDescription <span class="key">renameTo</span> getErrorDescription] </br>
+			<br/>
+		</code>
+	</div>
+	
+	<p/>
+	
+	<strong>Trait field renaming</strong>
+	<p>
+		Renames a <strong>required</strong> field of a trait.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">trait</span> TErrorMessage <span class="key">is</span> TMessage[description <span class="key">renameFieldTo</span> errorDescription] </br>
+			<br/>
+		</code>
+	</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.example.swrtj.generator
+Bundle-Vendor: Dipartimento di Informatica, Univ. di Torino
+Bundle-Version: 1.0.1
+Bundle-SymbolicName: org.xtext.example.swrtj.generator; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle:  org.xtext.example.swrtj;visibility:=reexport,
+ org.eclipse.xpand;bundle-version="1.0.0";visibility:=reexport,
+ org.eclipse.xtend;bundle-version="1.0.0";visibility:=reexport,
+ org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.emf.mwe.utils;visibility:=reexport,
+ org.eclipse.xtend.typesystem.emf;visibility:=reexport
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: templates

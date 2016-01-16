@@ -1,0 +1,27 @@
+«IMPORT swrtj»
+
+«EXTENSION templates::Expressions»
+«EXTENSION templates::External»
+
+«DEFINE program FOR Program-»
+«FILE this.uriToPackage() + "/" + this.name + ".java"-»
+package «this.uriToName()»;
+
+«EXPAND Commons::import FOREACH this.urisToNames()»
+public class «this.name-» {
+	public static void main(String[] argList) throws java.lang.Throwable {
+		java.util.List<java.lang.Object> args = convert(argList);«"\n"»«this.block.preprocessBlock("\t\t", null, null)»
+	}
+	
+	private static java.util.List<java.lang.Object> convert(String[] args) {
+		java.util.List<java.lang.Object> input = new java.util.ArrayList<java.lang.Object>(args.length); 
+		
+		for(String arg : args) {
+			input.add(arg);
+		}
+		
+		return input;
+	}
+}
+«ENDFILE-»
+«ENDDEFINE»

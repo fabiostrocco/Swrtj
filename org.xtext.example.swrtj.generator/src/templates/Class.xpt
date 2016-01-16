@@ -1,0 +1,40 @@
+«IMPORT swrtj»
+«IMPORT ecore»
+
+«EXTENSION templates::External»
+«EXTENSION templates::Expressions»
+
+«DEFINE class FOR Class-»
+«FILE this.uriToPackage() + "/" + this.name + ".java"-»
+package «this.uriToName()»;
+
+«EXPAND Commons::import FOREACH this.urisToNames()»
+public class «this.name»«IF !this.implementsList.isEmpty» implements «EXPAND implements FOREACH this.implementsList SEPARATOR ", "»«ENDIF» {
+	«EXPAND Record::recordExpression FOR this.recordExpression-»
+	«EXPAND constructorList FOR this.constructorList-»
+	«EXPAND Trait::traitExpression FOR this.traitExpression-»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE implements FOR Interface-»
+«this.toJavaName()-»
+«ENDDEFINE»
+
+«DEFINE constructorList FOR List[Constructor]-»
+«EXPAND constructor FOREACH this SEPARATOR "\n"-»
+«IF !this.isEmpty-»«"\n"»«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE constructor FOR Constructor-»
+	public «this.name»(«EXPAND Commons::parameterDeclaration FOREACH this.parameterList SEPARATOR ", "»)  {
+		try {
+«LET this.block AS block-»
+«block.preprocessConstructorBlock()-»
+«IF !block.parameterList.isEmpty || !block.statementList.isEmpty»«"\n"»«ENDIF-»
+«ENDLET»
+		} catch(java.lang.Throwable ex) {
+			throw new java.lang.RuntimeException(ex);
+		}
+	}
+«ENDDEFINE»

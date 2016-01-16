@@ -1,0 +1,11 @@
+import "MyModel.swrtj"
+
+class CK implements I6, I3 by {} and {void m1(){} I3 m3(){return this;}} {}
+
+class Empty implements I6 by {} and {} {}
+
+class OnlyFields implements I6 by {int a;} and {} {}
+
+class OnlyMethods implements I6 by {} and {void m1(){}} {}
+
+class OnlyConstructors implements I6 by {} and {} {OnlyConstructors(){} OnlyConstructors(int a){}}

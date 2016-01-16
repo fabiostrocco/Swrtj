@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="SWRTJ" url="http://swrtj.sourceforge.net/updates/">
+      SWRTJ (Sugared Welterweight Record-Trait Java) is a dialect of
+Java, where units of objects&apos; functionality are modeled by traits
+and by records, which are assembled in classes that are instantiated
+(as usual) to build objects.
+   </description>
+   <feature url="features/org.xtext.example.swrtj.feature_1.0.0.jar" id="org.xtext.example.swrtj.feature" version="1.0.0">
+      <category name="programming_languages"/>
+   </feature>
+   <feature url="features/org.xtext.example.swrtj.feature_1.0.1.jar" id="org.xtext.example.swrtj.feature" version="1.0.1">
+      <category name="programming_languages"/>
+   </feature>
+   <feature url="features/org.xtext.example.swrtj.feature_1.0.2.jar" id="org.xtext.example.swrtj.feature" version="1.0.2">
+      <category name="programming_languages"/>
+   </feature>
+   <category-def name="programming_languages" label="Programming Languages"/>
+</site>

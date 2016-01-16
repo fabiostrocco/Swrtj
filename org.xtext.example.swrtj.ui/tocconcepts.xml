@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Concepts" link_to="toc.xml#concepts"> 
+	<topic href="html/concepts/project.html" label="Swrtj Project">
+	</topic>
+ <topic label="Swrtj Language">
+    <topic href="html/concepts/Interfaces.html" label="Interfaces">
+    </topic>
+    <topic href="html/concepts/Records.html" label="Records">
+    </topic>
+    <topic href="html/concepts/Traits.html" label="Traits">
+    </topic>
+    <topic href="html/concepts/Classes.html" label="Classes">
+    </topic>
+    <topic href="html/concepts/Programs.html" label="Programs">
+    </topic>
+    <topic href="html/concepts/Imports.html" label="Imports">
+    </topic>
+    <topic href="html/concepts/CLF.html" label="Common language features">
+    </topic>
+ </topic>
+ <topic label="Swrtj User Interface">
+    <topic href="html/concepts/SyntaxHighlything.html" label="Syntax Highlithing">
+    </topic>
+    <topic href="html/concepts/CodeCompletion.html" label="Code completion">
+    </topic>
+    <topic href="html/concepts/Outline.html" label="Outline View">
+    </topic>
+    <topic href="html/concepts/Validation.html" label="Validation">
+    </topic>
+    <topic href="html/concepts/CodeGeneration.html" label="Code generation">
+    </topic>
+    <topic href="html/concepts/QuickFix.html" label="Quick Fix">
+    </topic>
+ </topic> 
+</toc>

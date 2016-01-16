@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWRTJ
+Bundle-SymbolicName: org.xtext.example.swrtj.rcp; singleton:=true
+Bundle-Version: 1.0.2
+Bundle-Activator: org.xtext.example.swrtj.rcp.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.views;bundle-version="3.5.0",
+ org.xtext.example.swrtj;bundle-version="1.0.1",
+ org.xtext.example.swrtj.generator;bundle-version="1.0.1",
+ org.xtext.example.swrtj.ui;bundle-version="1.0.1"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: Dipartimento di Informatica, Univ. di Torino

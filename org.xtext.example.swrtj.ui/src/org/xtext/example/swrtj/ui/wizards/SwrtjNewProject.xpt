@@ -1,0 +1,204 @@
+«IMPORT ProjectWizard»
+
+«DEFINE main FOR ProjectInfo»
+«IF this.exampleType.toString() == "BankAccount"»
+«EXPAND base FOR this»
+«EXPAND deltas FOR this»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE base FOR ProjectInfo»
+«FILE "src/Base.swrtj"-»
+interface IAccount {
+	void update(int x);
+}
+	
+record RAccount is {
+	int balance; /* provided field */
+}
+	
+trait TAccount is {
+	int balance; /* required field */
+	
+	void update(int x) { /* provided method */
+		this.balance = this.balance + x;
+	}
+}
+
+class Account implements IAccount by RAccount and TAccount {}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE deltas FOR ProjectInfo»
+«FILE "src/Deltas.swrtj"-»
+import "Base.swrtj"
+
+/*SYNC ACCOUNT*/
+
+record RSync is {
+	ILock lock; /* provided field */
+}
+		
+trait TSync is {
+	ILock lock; /* required field */
+	
+	void m(int x); /* required method */
+	/* provided method */
+	void sync_m(int x) {
+		this.lock.lock();
+		this.m(x);
+		this.lock.unlock();
+	} 
+}
+
+record RSyncAccount is RSync + RAccount
+
+trait TSyncAccount is TAccount[update renameM unsyncUpdate] +
+                      TSync[m renameM unsyncUpdate, sync_m renameM update]
+                      
+class SyncAccount implements IAccount by RSyncAccount and TSyncAccount {}
+
+/* RET ACCOUNT */
+
+interface IBonusAccount extends IAccount {
+	void addBonus(int b);
+}
+
+record RBonus is RAccount[balance renameF _401balance]
+
+trait TBonus is TAccount[balance renameF _401balance,
+                         update renameM addBonus]
+                         
+interface IRetAccount extends IBonusAccount {}
+
+record RRetAccount is RBonus
+
+trait TRetAccount is TBonus +
+                     TAccount[balance renameF _401balance]
+                     
+                     
+class RetAccount implements IRetAccount by RRetAccount and TRetAccount {}
+
+/* INV ACCOUNT */
+
+trait TInv is TBonus + {
+	int _401balance; /* required field */
+	
+	void originalUpdate(int x); /* required method */
+	
+	void update(int x) {
+		int val = x / 2;
+		this.originalUpdate(val);
+		this._401balance = this._401balance + val;
+	}
+}
+
+interface IInvAccount extends IBonusAccount {}
+
+record RInvAccount is RBonus + RAccount
+
+trait TInvAccount is TInv + TAccount[update renameM originalUpdate]
+
+class InvAccount implements IInvAccount by RInvAccount and TInvAccount {}
+
+/* ACCOUNT WH */
+
+interface IClient {
+	void payday(int x, int bonus);
+}
+
+record RClient is {
+	IBonusAccount a; /* provided field */
+}
+
+trait TClient is {
+	IBonusAccount a; /* required field */
+	
+	/* provided method*/
+	void payday(int x, int bonus) {
+		this.a.addBonus(bonus);
+		this.a.update(x);
+	}
+}
+
+class Client implements IClient by RClient and TClient {}
+
+/* SYNC RET ACCOUNT */
+
+trait TSync2 is TSync + TSync[m renameM m1, sync_m renameM sync_m1]
+
+trait TSyncBonusAccount is TSync2[m renameM unsyncUpdate,
+                                  sync_m renameM update,
+                                  m1 renameM unsyncAddBonus,
+                                  sync_m1 renameM addBonus]
+                                  
+record RSyncRetAccount is RSync + RRetAccount
+
+trait TSyncRetAccount is TSyncBonusAccount + 
+                         TRetAccount[update renameM unsyncUpdate,
+                         addBonus renameM unsyncAddBonus]
+                         
+class SyncRetAccount implements IRetAccount by RSyncRetAccount and TSyncRetAccount {}
+
+/* SYNC INV ACCOUNT */
+
+record RSyncInvAccount is RSync + RInvAccount
+
+trait TSyncInvAccount is TSyncBonusAccount +
+                         TInvAccount[update renameM unsyncUpdate,
+                                     addBonus renameM unsyncAddBonus]
+                                     
+class SyncInvAccount implements IInvAccount by RSyncInvAccount and TSyncInvAccount {}
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE classpth FOR ProjectInfo»
+«FILE ".classpath"-»
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src-gen"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE proj FOR ProjectInfo»
+«FILE ".project"-»
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<projectDescription>
+	<name>Project</name>
+	<comment></comment>
+	<projects></projects>
+	
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand
+		
+		<buildCommand>
+			<name>org.eclipse.xtext.builder.xtextBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.xtext.builder.xtextNature</nature>
+	</natures>
+</projectDescription>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE manifest FOR ProjectInfo»
+«FILE "META-INF/MANIFEST.MF"-»
+Manifest-Version: 1.0
+Main-Class: Main
+«ENDFILE»
+«ENDDEFINE»

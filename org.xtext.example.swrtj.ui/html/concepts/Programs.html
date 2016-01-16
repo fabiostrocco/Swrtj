@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Programs</title>
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Programs</h1>
+	<p>
+		The <em>program</em> construct is used to create a runnable file. It corresponds to the java Main class, i.e., a class that contains the 'main' method.<br/>
+		Note that you can create more programs within a single file.<br/>
+		Here's the 'Hello world' example.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">program</span> Main { <br/>
+				&emsp;&emsp;out.println("Hello World"); <br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+	<p>
+		Swrtj language makes available three system constants for the input output.
+	</p>
+	<ul>
+		<li><strong>in</strong>: that is the standard input reader (of type <em>IScanner</em>). This constant is also available outside program expressions.</li>
+		<li><strong>args</strong>: that is the list of commands passed from the shell (of type <em>IList</em>).<br/>
+			This constant is available only within program expressions.
+			</li>
+		<li><strong>out</strong>: that is the standard output writer (of type <em>IPrintStream</em>). This constant is also available outside program expressions.</li>		
+	<ul/>
+</body>
+</html>

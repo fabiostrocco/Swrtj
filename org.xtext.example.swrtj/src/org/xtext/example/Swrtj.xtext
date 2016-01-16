@@ -1,0 +1,236 @@
+grammar org.xtext.example.Swrtj with org.eclipse.xtext.common.Terminals
+//import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+
+generate swrtj "http://www.xtext.org/example/Swrtj"
+
+File : (importList+=Import)* (elementList+=Element)*;
+
+Import : 'import' importURI=STRING;
+
+Element :
+	Interface   |
+	Record      |
+	Trait       |
+	Class       |
+	Program;
+
+/*Element declarations*/
+
+Interface : construct='interface' name=ID ('extends' (extendsList+=[Interface]) (',' extendsList+=[Interface])*)? '{'
+	(requiredMethodList+=RequiredMethod)*
+'}';
+
+Record : construct='record' name=ID 'is' expression=RecordExpression;
+
+Trait : construct='trait' name=ID 'is' expression=TraitExpression;
+
+Class : construct='class' name=ID 'implements' implementsList+=[Interface] (',' implementsList+=[Interface])*
+	'by' recordExpression=RecordExpression 'and' traitExpression=TraitExpression '{'
+	(constructorList+=Constructor)*
+'}';
+
+Program : construct='program' name=ID '{'
+	block=Block
+'}';
+
+/*Traits and records*/
+
+RecordExpression : 
+	recordList+=BaseRecord ('+' recordList+=BaseRecord)*;
+	
+BaseRecord : 
+	AnonimousRecord |
+	RecordName      |
+	NestedRecordExpression;
+	
+AnonimousRecord : '{'
+	{AnonimousRecord} (declarationList+=FieldDeclaration)*
+'}' ('[' operationList += RecordOperation (',' operationList += RecordOperation)* ']')?;
+
+RecordName : record=[Record] ('[' operationList += RecordOperation (',' operationList += RecordOperation)* ']')?;
+
+NestedRecordExpression : '(' expression=RecordExpression ')' 
+                         ('[' operationList += RecordOperation (',' operationList += RecordOperation)* ']')?;
+
+RecordOperation : 
+	{RecordExclude} 'exclude' field=[FieldName] |
+	{RecordRename} originalField=[FieldName] 'renameTo' newField=FieldName |
+	{RecordRename} originalField=[FieldName] 'renameF' newField=FieldName;
+
+TraitExpression : 
+	traitList+=BaseTrait ('+' traitList+=BaseTrait)*;
+	
+BaseTrait : 
+	AnonimousTrait |
+	TraitName      |
+	NestedTraitExpression;
+	
+AnonimousTrait : '{'
+	{AnonimousTrait} (definitionList+=TraitElement)*
+'}' ('[' operationList += TraitOperation (',' operationList += TraitOperation)* ']')?;
+
+TraitName : trait=[Trait] ('[' operationList += TraitOperation (',' operationList += TraitOperation)* ']')?;
+
+NestedTraitExpression : '(' expression=TraitExpression ')' 
+                         ('[' operationList += TraitOperation (',' operationList += TraitOperation)* ']')?;
+
+TraitOperation : 
+	{TraitExclude} 'exclude' method=[MethodName] |
+	{TraitAlias} originalMethod=[MethodName] 'aliasAs' newMethod=MethodName |
+	{TraitMethodRename} originalMethod=[MethodName] 'renameTo' newMethod=MethodName |
+	{TraitMethodRename} originalMethod=[MethodName] 'renameM' newMethod=MethodName |
+	{TraitFieldRename} originalField=[FieldName] 'renameFieldTo' newField=FieldName |
+	{TraitFieldRename} originalField=[FieldName] 'renameF' newField=FieldName;
+
+
+TraitElement :
+	RequiredField  |
+	RequiredMethod |
+	ProvidedMethod;
+	
+/*Variable and method declarations*/
+	
+FieldDeclaration returns Field : {FieldDeclaration} (modifier='transient' | modifier='volatile')? type=Type fieldRef=FieldName ';';
+
+RequiredField returns Field : {RequiredField} type=Type fieldRef=FieldName ';';
+
+RequiredMethod returns Method : {RequiredMethod} returnType=ReturnType methodRef=MethodName '(' ((parameterList+=Parameter) (',' parameterList+=Parameter)*)? ')' ';';
+
+ProvidedMethod returns Method : {ProvidedMethod} (isSynchronized?='synchronized')? returnType=ReturnType methodRef=MethodName '(' ((parameterList+=Parameter) (',' parameterList+=Parameter)*)? ')' '{'
+	block=Block (returnStatement=ReturnStatement)?
+'}';
+
+Constructor : name=ID '(' ((parameterList+=Parameter) (',' parameterList+=Parameter)*)? ')' '{'
+	block=Block
+'}';
+
+ReturnStatement : 'return' expression=Expression ';';
+
+Parameter returns Parameter : {FormalParameter} type=Type name=ID;
+
+FieldName : name=ID;
+
+MethodName : name=ID;
+
+Type returns Type: 
+	interfaceType=[Interface] |
+	//javaType=[types::JvmType] |
+	primitiveType='byte'     |
+	primitiveType='char'     |
+	primitiveType='boolean'  |
+	primitiveType='short'    |
+	primitiveType='int'      |
+	primitiveType='long'     |
+	primitiveType='float'    |
+	primitiveType='double';
+	 
+ReturnType returns Type: 
+	interfaceType=[Interface] |
+	//javaType=[types::JvmType] |
+	primitiveType='byte'      |
+	primitiveType='char'      |
+	primitiveType='boolean'   |
+	primitiveType='short'     |
+	primitiveType='int'       |
+	primitiveType='long'      |
+	primitiveType='float'     |
+	primitiveType='double'    |
+	primitiveType='void';
+
+/*Method implementation*/
+
+Block : {Block} (parameterList+=LocalParameter)* (statementList+=Statement)*;
+
+Statement : 
+	ExpressionStatement |
+	IfThenElseStatement |
+	WhileStatement;
+
+ExpressionStatement : expression=Expression ';';
+
+IfThenElseStatement : 
+	'if' '(' condiction=BooleanExpression ')' '{'
+		trueBranch=Block
+	'}' ('else' '{'
+		falseBranch=Block
+	'}')?;
+	
+WhileStatement : 'while' '(' condiction=BooleanExpression ')' '{'
+	whileBlock=Block
+'}';
+
+//Boolean expressions
+
+BooleanExpression returns GenericExpression : {BooleanExpression} atomicList+=AtomicBooleanExpression (booleanOperatorList+=BooleanOperator atomicList+=AtomicBooleanExpression)*;
+
+BooleanOperator : operator='&' | operator='&&' | operator='|' | operator='||' | operator='^';
+
+AtomicBooleanExpression : 
+	SimpleComparation |
+	NestedBooleanExpression;
+	
+SimpleComparation : (negated?='!')? leftExpression=Expression (compare=CompareOperator rightExpression=Expression)?;
+
+NestedBooleanExpression : (negated?='!')? '(' nestedExpression=BooleanExpression ')';
+
+CompareOperator : operator='<' | operator='<=' | operator='==' | operator='!=' | operator='>' | operator='>=';
+
+//Expressions
+
+LocalParameter returns Parameter : {LocalParameter} type=Type name=ID '=' value=Expression ';' |
+                                   {LocalParameter} type=Type name=ID '=' value=BooleanExpression ';';
+
+Expression returns GenericExpression : {Expression} (sign='-'|sign='+')? termList+=DottedExpression (operatorList+=('+'|'-'|'*'|'/'|'%') termList+=DottedExpression)*;
+
+DottedExpression : 
+	start=Start ({DottedExpression.receiver=current} '.' message=Message)* ({DottedExpression.receiver=current} '.' message=FieldAccess ('=' (value=Expression | value=BooleanExpression))?)?;
+
+Start : 
+	Null                  |
+	Output                |
+	Input                 |
+	Args                  |
+	BooleanConstant       |
+	Number                |
+	StringConstant        |
+	Cast                  |
+	This                  |
+	ParameterReference    |
+	ConstructorInvocation |
+	NestedExpression      |
+	ParameterAssignment;
+
+Null : null?='null';
+
+Input : input?='in';
+
+Args : args?='args';
+
+Output : output?='out';
+
+BooleanConstant : value='true' | value='false';
+
+Number : value=INT;
+
+StringConstant : value=STRING;
+
+This : this?='this';
+
+ParameterReference : parameter=[Parameter];
+
+ConstructorInvocation : 'new' classRef=[Class] '(' (((argumentList+=Expression | argumentList+=BooleanExpression) ',')* 
+	(argumentList+=Expression | argumentList+=BooleanExpression))? ')';
+
+Cast : '(' type=Type ')' start=Start;
+
+NestedExpression : '(' expression=Expression ')';
+
+Message : 
+	MethodInvocation |
+	FieldAccess;
+	
+MethodInvocation : method=[MethodName] '(' ((argumentList+=Expression | argumentList+=BooleanExpression) (',' (argumentList+=Expression | argumentList+=BooleanExpression))*)? ')';
+
+FieldAccess : field=[FieldName];
+
+ParameterAssignment : parameter=[Parameter] '=' (value=Expression | value=BooleanExpression);

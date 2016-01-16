@@ -1,0 +1,49 @@
+«IMPORT swrtj»
+«IMPORT ecore»
+
+«EXTENSION templates::Expressions»
+«EXTENSION templates::External»
+
+«DEFINE import FOR String-»
+import «this».*;
+«ENDDEFINE»
+
+«DEFINE fieldDeclaration FOR FieldName-»
+	private «IF ((FieldDeclaration)this.getField()).modifier != null»«((FieldDeclaration)this.getField()).modifier» «ENDIF»«this.getType().preprocessType()» «this.name-»;
+«ENDDEFINE»
+
+«DEFINE requiredMethod FOR RequiredMethod-»
+	public «this.returnType.preprocessType()» «this.methodRef.name»(«EXPAND parameterDeclaration FOREACH this.parameterList SEPARATOR ", "-»);
+«ENDDEFINE»
+
+«REM»List is composed by [0 : MethodName, 1: Map[OriginalName, ToTranslateName] for this invokations]«ENDREM»
+«DEFINE providedMethod FOR List-»
+	«LET (MethodName)this.get(0) AS methodName-»
+	«LET (ProvidedMethod)(methodName.getMethod()) AS method-»
+	«LET methodName.name AS name-»
+	«LET (List)this.get(1) AS originalNames-»
+	«LET (List)this.get(2) AS realNames-»
+	public «IF method.isSynchronized»synchronized «ENDIF»«method.returnType.preprocessType()-» «name-»(«EXPAND parameterDeclaration FOREACH method.parameterList SEPARATOR ", "-») {
+		try {
+«method.block.preprocessBlock("\t\t\t", originalNames, realNames)-»
+«IF !method.parameterList.isEmpty || !method.block.statementList.isEmpty»«"\n"»«ENDIF-»
+«LET method.returnStatement AS return-»
+«IF return != null-»
+«IF !method.block.parameterList.isEmpty || !method.block.statementList.isEmpty»«"\n"»«ENDIF-»
+			return «method.returnStatement.expression.preprocessExpression(originalNames, realNames)-»;
+«ENDIF-»
+«ENDLET-»
+		} catch(java.lang.Throwable ex) {
+			throw new java.lang.RuntimeException(ex);
+		}
+	}
+	«ENDLET-»
+	«ENDLET-»
+	«ENDLET-»
+	«ENDLET-»
+	«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE parameterDeclaration FOR Parameter-»
+«this.type.preprocessType()-» «this.name-»
+«ENDDEFINE»

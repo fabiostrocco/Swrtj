@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Interfaces</title>
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<h1>Interfaces</h1>
+	<p>
+		The interface syntax and use is equivalent to java one but without modifier (like public, private, etc.).<br/>
+		Every interface implicitly extends the 'IObject' interface. Every interface is
+		subtype of IObject.<br/>
+		Here's an example
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">interface</span> IAccount { <br/>
+				&emsp;&emsp;<span class="key">void</span> update(<span class="key">int</span> price); <br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+	<p>
+		Multiple inheritance is allowed too.
+	</p>
+	<div class = "code">
+		<code>
+			<br/>
+			<span class="key">interface</span> IPostalAccount  <span class="key">extends</span> IAccount, IIDentificableAccount { <br/>
+				&emsp;&emsp;<span class="key">void</span> update(<span class="key">int</span> price); <br/>
+				&emsp;&emsp;<span class="key">int</span> getAccountID(); <br/>
+			} <br/>
+			<br/>
+		</code>
+	</div>
+</body>
+</html>

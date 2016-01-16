@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link href="Style.css" rel="stylesheet" type="text/css"/>
+	<title>Outline view</title>
+</head>
+
+<body>
+<h1>Outline view</h1>
+	<p>
+		The <em>outline</em> is a view (located at the right of the editor) that shows your swrtj file. The structure shown is a tree where the root is the file that
+		has interfaces, classes, records, traits, programs and imports as children.<br/>
+		Here's an example.
+	</p>
+	
+	<img src="Outline.png" align="center"/>
+	<p>
+		The red circle indicates a required field (like <em>stream</em> in <em>TSyncWriter2</em>), the green one indicates a provided field (like in classes).<br/>
+		Trait <em>TSyncWriter2</em> contains the <em>unsyncWrite</em> method with the red icon and the <em>write</em> method with the blue icon because the
+		first one is a request (i.e., the trait <em>TSyncWriter2</em> has not the implementation of this method) while the second one is a provided method.
+	</p>
+</body>
+</html>

@@ -1,0 +1,151 @@
+import swrtj;
+import ecore;
+extension templates::External;
+
+String preprocessConstructorBlock(Block this) :
+	this.preprocessBlock("\t\t\t", null, null);
+
+String preprocessBlock(Block this, String tab, List originalNames, List realNames) :
+	this.parameterList.typeSelect(LocalParameter).preprocessParameter(tab, originalNames, realNames).toString("\n") +
+	(!this.parameterList.isEmpty ? "\n\n" : "") +
+	this.statementList.preprocessStatement(tab, originalNames, realNames).toString("\n");
+	
+String preprocessParameter(LocalParameter this, String tab, List originalNames, List realNames) : 
+	tab + this.type.preprocessType() + " " + this.name + " = " + this.value.preprocessExpression(originalNames, realNames) + ";";
+
+String preprocessStatement(Statement this, String tab, List originalNames, List realNames) :
+	if(this.metaType.name == getMetaType("ExpressionStatement")) then ((ExpressionStatement)this).preprocessExpressionStatement(tab, originalNames, realNames)
+	else if(this.metaType.name == getMetaType("IfThenElseStatement")) then ((IfThenElseStatement)this).preprocessIfStatement(tab, originalNames, realNames)
+	else if(this.metaType.name == getMetaType("WhileStatement")) then ((WhileStatement)this).preprocessWhileStatement(tab, originalNames, realNames);
+	
+String preprocessExpressionStatement(ExpressionStatement this, String tab, List originalNames, List realNames) : 
+	tab + this.expression.preprocessExpression(originalNames, realNames) + ";";
+
+String preprocessIfStatement(IfThenElseStatement this, String tab, List originalNames, List realNames) :
+	let enter = "\n" :
+		tab + "if (" + ((BooleanExpression)this.condiction).preprocessBooleanExpression(originalNames, realNames) + ") {" + enter +
+		this.trueBranch.preprocessBlock(tab + "\t", originalNames, realNames) + enter + tab + "}" + (this.falseBranch != null ? enter + tab + "else {" + enter +
+		this.falseBranch.preprocessBlock(tab + "\t", originalNames, realNames) + enter + tab + "}" : "");
+		
+String preprocessWhileStatement(WhileStatement this, String tab, List originalNames, List realNames) :
+	let enter = "\n" :
+		tab + "while (" + ((BooleanExpression)this.condiction).preprocessBooleanExpression(originalNames, realNames) + ") {" + enter +
+		this.whileBlock.preprocessBlock(tab + "\t", originalNames, realNames) + enter + tab + "}";
+
+String preprocessExpression(GenericExpression this, List originalNames, List realNames) :
+	switch(this.metaType.name) {
+		case getMetaType("Expression") : ((Expression)this).preprocessExpression(originalNames, realNames)
+		case getMetaType("BooleanExpression") : ((BooleanExpression)this).preprocessBooleanExpression(originalNames, realNames)
+		default : ""
+	};
+
+String preprocessExpression(Expression this, List originalNames, List realNames) :
+	(if this.sign != null then this.sign else "") + this.preprocessExpression(0, this.termList.size > 1, originalNames, realNames);
+
+String preprocessExpression(Expression this, Integer index, Boolean putBraces, List originalNames, List realNames) :
+	if(index < this.termList.size) then
+		this.termList.get(index).preprocessDottedExpression(putBraces, originalNames, realNames) +
+		(if index < this.operatorList.size then " " + this.operatorList.get(index) else "") + 
+		(if(index + 1 < this.termList.size) then " " else "") +
+		this.preprocessExpression(index + 1, putBraces, originalNames, realNames)
+	else "";
+			
+String preprocessDottedExpression(DottedExpression this, Boolean putBraces, List originalNames, List realNames) :
+	if(this.value != null) then 
+		(if putBraces then "(" else "") + "this." + getElementName(((FieldAccess)this.message), originalNames, realNames) + 
+	    " = " + this.value.preprocessExpression(originalNames, realNames) + (if putBraces then ")" else "")
+	else
+		let start = this.start :
+		let message = this.message :
+		if start != null then start.preprocessStart(originalNames, realNames)
+		else if message != null then this.receiver.preprocessDottedExpression(putBraces, originalNames, realNames) + 
+		                             message.preprocessMessage(originalNames, realNames)
+		else "";
+
+String preprocessStart(Start this, List originalNames, List realNames) :
+	let type = this.metaType.name :
+		switch(type) {
+			case getMetaType("Null") : ((Null)this).preprocessNull()
+			case getMetaType("Input") : ((Input)this).preprocessInput()
+			case getMetaType("Args") : ((Args)this).preprocessArgs()
+			case getMetaType("Output") : ((Output)this).preprocessOutput()
+			case getMetaType("BooleanConstant") : ((BooleanConstant)this).preprocessBooleanConstant()
+			case getMetaType("Number") : ((Number)this).preprocessNumber()
+			case getMetaType("StringConstant") : ((StringConstant)this).preprocessStringConstant()
+			case getMetaType("This") : ((This)this).preprocessThis()
+			case getMetaType("ParameterReference") : ((ParameterReference)this).preprocessParameterReference()
+			case getMetaType("ConstructorInvocation") : ((ConstructorInvocation)this).preprocessConstructorInvocation(originalNames, realNames)
+			case getMetaType("Cast") : ((Cast)this).preprocessCast(originalNames, realNames)
+			case getMetaType("NestedExpression") : "(" + ((NestedExpression)this).expression.preprocessExpression(originalNames, realNames) + ")"
+			case getMetaType("ParameterAssignment") : ((ParameterAssignment)this).preprocessParameterAssignment(originalNames, realNames)
+			default : ""
+		};
+
+String preprocessNull(Null this) : "null";
+String preprocessInput(Input this) : "new java.util.Scanner(java.lang.System.in)";
+String preprocessArgs(Args this) : "args";
+String preprocessOutput(Output this) : "java.lang.System.out";
+String preprocessBooleanConstant(BooleanConstant this) : this.value;
+String preprocessNumber(Number this) : this.value.toString();
+String preprocessStringConstant(StringConstant this) : "\"" + this.value + "\"";
+String preprocessThis(This this) : "this";
+String preprocessParameterReference(ParameterReference this) : this.parameter.name;
+String preprocessConstructorInvocation(ConstructorInvocation this, List originalNames, List realNames) : "new " + this.classRef.getName() + "(" + this.argumentList.listArguments(originalNames, realNames) + ")";
+String preprocessCast(Cast this, List originalNames, List realNames) : "(" + this.type.preprocessType() + ")" + this.start.preprocessStart(originalNames, realNames);
+String preprocessNestedExpression(NestedExpression this, List originalNames, List realNames) : this.expression.preprocessExpression(originalNames, realNames);
+
+String preprocessMessage(Message this, List originalNames, List realNames) : let type = this.metaType.name :
+		switch(type) {
+			case getMetaType("MethodInvocation") : ((MethodInvocation)this).preprocessMethodInvocation(originalNames, realNames)
+			case getMetaType("FieldAccess") : ((FieldAccess)this).preprocessFieldAccess(originalNames, realNames)
+			default : ""
+		};
+
+String preprocessMethodInvocation(MethodInvocation this, List originalNames, List realNames) : "." + getElementName(this, originalNames, realNames) + "(" + this.argumentList.listArguments(originalNames, realNames) + ")";
+String preprocessFieldAccess(FieldAccess this, List originalNames, List realNames) : "." + getElementName(this, originalNames, realNames);
+String preprocessParameterAssignment(ParameterAssignment this, List originalNames, List realNames) : this.parameter.name + " = " + this.value.preprocessExpression(originalNames, realNames);
+
+String listArguments(List[Expression] this, List originalNames, List realNames) : 
+	this.preprocessExpression(originalNames, realNames).toString(", ");
+
+String preprocessType(Type this) :
+	if(this.primitiveType != null) then 
+		this.primitiveType
+	else if(this.interfaceType != null) then 
+		this.interfaceType.toJavaName()
+	else if(this.interfaceType != null) then this.interfaceType.name
+	else "";
+	
+/*Boolean expressions*/
+String preprocessBooleanExpression(BooleanExpression this, List originalNames, List realNames) : this.recursivePreprocess(0, originalNames, realNames);
+
+String recursivePreprocess(BooleanExpression this, int position, List originalNames, List realNames) : 
+	(position < this.atomicList.size ? this.atomicList.get(position).preprocessAtomicBooleanExpression(originalNames, realNames) : "") + 
+    (position < this.booleanOperatorList.size ? " " + this.booleanOperatorList.get(position).operator + " " : "")  +
+    (position < this.atomicList.size ? this.recursivePreprocess(position + 1, originalNames, realNames) : "");
+
+String preprocessAtomicBooleanExpression(AtomicBooleanExpression this, List originalNames, List realNames) : 
+let type = this.metaType.name :
+		switch(type) {
+			case getMetaType("SimpleComparation") : ((SimpleComparation)this).preprocessSimpleComparation(originalNames, realNames)
+			case getMetaType("NestedBooleanExpression") : ((NestedBooleanExpression)this).preprocessNestedBooleanExpression(originalNames, realNames)
+			default : ""
+		};
+
+String preprocessSimpleComparation(SimpleComparation this, List originalNames, List realNames) : 
+	(this.negated ? "!(" : "") +
+	this.leftExpression.preprocessExpression(originalNames, realNames) + 
+	" " + (this.compare != null ? this.compare.operator + " " : "") +
+	(this.rightExpression != null ? this.rightExpression.preprocessExpression(originalNames, realNames) : "") +
+	(this.negated ? ")" : "");
+	
+String preprocessNestedBooleanExpression(NestedBooleanExpression this, List originalNames, List realNames) : 
+	(this.negated ? "!" : "") +
+	"(" + ((BooleanExpression)this.nestedExpression).preprocessBooleanExpression(originalNames, realNames) + ")";
+	
+/*Auxiliary methods*/
+String getName(Class this) :
+	if(this.toJavaName() != null) then this.toJavaName()
+	else this.name;
+	
+String getMetaType(String metaType) : "swrtj::" + metaType;
